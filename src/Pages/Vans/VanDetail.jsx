@@ -3,19 +3,21 @@ import { useParams, Link, useLocation } from "react-router-dom";
 
 function VanDetail() {
   const params = useParams();
-  const [van, setVan] = useState(null);
   const location = useLocation();
   // const search = location.state?.search || "";
-  const search = (location.state && location.state.search) || "";
-  const type = location.state?.type || "all";
+  
+  const [van, setVan] = useState(null);
   
   // console.log(search);
-
+  
   useEffect(() => {
     fetch(`/api/vans/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setVan(data.vans));
+    .then((res) => res.json())
+    .then((data) => setVan(data.vans));
   }, [params.id]);
+
+  const search = (location.state && location.state.search) || "";
+  const type = location.state?.type || "all";
   console.log(params.id)
 
   return (
